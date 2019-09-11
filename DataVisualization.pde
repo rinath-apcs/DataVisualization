@@ -9,29 +9,26 @@ final float[][] scores =
 
 final int[] years = {2019, 2018, 2017, 2016};
 
+int selected;
+
+PieChart pie;
+
 void setup() {
-  size(300, 300);
+  size(500, 500);
   
   background(200);
   
-  pieChart(scores[0]);
+  selected = 0;
+  
+  pie = new PieChart(scores[0], 300, 200, 250);
 }
 
 void draw() {
-
+  pie.tick();
+  pie.update(scores[selected]);
+  
 }
 
-void pieChart(float[] data) {
-  float pos = 0;
-  for (int i = 0; i < data.length; i++) {
-    float val = data[i];
-
-    fill(i*51,55+i*40,150-i*30);
-    float end = pos + (val / 100.0) * 2.0 * PI;
-    arc(150.0, 150.0, 150, 150, pos, end);
-    pos = end;
-  }
-  
-  fill(200);
-  circle(150.0, 150.0, 100.0);
+void mouseClicked() {
+  selected = (selected + 1) % 4;
 }
