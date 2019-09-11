@@ -7,7 +7,7 @@ final float[][] scores =
   {24.5, 23.4, 22.5, 17.9, 11.7}  // 2016
 };
 
-final int[] years = {2019, 2018, 2017, 2016};
+final String[] years = {"2019", "2018", "2017", "2016"};
 
 int selected;
 
@@ -24,9 +24,17 @@ void setup() {
 }
 
 void draw() {
+  background(200);
+  
   pie.tick();
   pie.update(scores[selected]);
   
+  fill(0);
+  textAlign(CENTER, TOP);
+  textSize(26);
+  text(years[selected], 250, 20);
+  textSize(14);
+  text("APUSH Score Distribution", 250, 70);
 }
 
 void mouseClicked() {
