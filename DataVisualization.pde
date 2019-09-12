@@ -14,13 +14,13 @@ int selected;
 PieChart pie;
 
 void setup() {
-  size(500, 500);
+  size(700, 700);
   
   background(200);
   
   selected = 0;
   
-  pie = new PieChart(scores[0], 300, 200, 250);
+  pie = new PieChart(scores[0], 300, 200, 350);
 }
 
 void draw() {
@@ -32,9 +32,9 @@ void draw() {
   fill(0);
   textAlign(CENTER, TOP);
   textSize(26);
-  text(years[selected], 250, 20);
+  text(years[selected], 350, 20);
   textSize(14);
-  text("APUSH Score Distribution", 250, 70);
+  text("APUSH Score Distribution", 350, 70);
 }
 
 void mouseClicked() {

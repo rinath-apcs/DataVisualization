@@ -2,6 +2,7 @@ public class PieChart {
   private float[] goalData;
   private float[] drawData = {0.0, 0.0, 0.0, 0.0, 0.0};
   private float greaterRadius;
+  private float avgRadius;
   private float innerRadius;
   private float center;
 
@@ -13,11 +14,12 @@ public class PieChart {
       #1BF051, //4.0
       #1BCBF0, //5.0
   };
-
+c
   public PieChart(float[] d, float gR, float iR, float c) {
-    goalData = d;
+    update(d);
     greaterRadius = gR;
     innerRadius = iR;
+    avgRadius = (iR + gR)/ 4.0;
     center = c;
   }
 
@@ -29,12 +31,17 @@ public class PieChart {
     for (int i = 0; i < drawData.length; i++) {
       fill(colors[i]);
       float end = pos + (drawData[i] / 100.0) * 2.0 * PI;
+      float textPos = (end + pos) / 2.0;
       arc(center, center, greaterRadius, greaterRadius, pos, end);
+      fill(255);
+      textAlign(CENTER, CENTER);
+      text((i + 1) + ".0" ,  cos(textPos) * avgRadius + center, sin(textPos) * avgRadius + center);
+      text(goalData[i] + "%", cos(textPos) * (innerRadius - 5.0) + center, sin(textPos) * (innerRadius - 5.0) + center);
       pos = end;
     }
   
     fill(200);
-    circle(center, center, innerRadius);
+    ellipse(center, center, innerRadius, innerRadius);
   }
   
   public void update(float[] data) {
@@ -45,7 +52,7 @@ public class PieChart {
     for (int i = 0; i < drawData.length; i++) {
       if (drawData[i] < goalData[i]) {
         drawData[i] += 0.1;
-      } else if (drawData[i] > goalData[i]) {
+      } else if (drawData[i] > goalData[i]+0.2) {
         drawData[i] -= 0.1;
       }  
     }
